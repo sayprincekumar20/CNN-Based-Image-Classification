@@ -1,61 +1,60 @@
-# CNN-Based-Image-Classification
-Summary Analysis of CNN-Based Image Classification Code
+## CNN Image Classification with Overfitting Reduction
 
-1. Dataset Loading
+ ### Overview
 
-The dataset is downloaded using kagglehub from salader/dogs-vs-cats.
+This project implements a Convolutional Neural Network (CNN) for classifying images of cats and dogs using TensorFlow and Keras. It explores techniques to reduce overfitting and improve model accuracy.
 
-The dataset path is determined, and its directory structure is checked using os.listdir(dataset_path).
+Dataset
 
-2. Data Preprocessing & Generators
+The dataset is downloaded from Kaggle using kagglehub and consists of training and validation images of cats and dogs.
 
-keras.utils.image_dataset_from_directory is used to load training and validation data from directories.
+Model Architectures
 
-Image size is set to (256, 256) with a batch size of 32.
+Three different CNN architectures were implemented to analyze and mitigate overfitting:
 
-A preprocessing function normalizes images by scaling pixel values between 0 and 1.
+1. Basic CNN Model
 
-The datasets are mapped to the normalization function to ensure consistent input.
+Trained on the dataset without any regularization.
 
-3. Initial CNN Model Architecture
+Used convolutional layers followed by max pooling and fully connected layers.
 
-Conv2D layers are used to extract features, with ReLU activation.
+Evaluated using training loss and accuracy.
 
-MaxPooling2D layers reduce spatial dimensions and computational complexity.
+2. CNN Model with Batch Normalization
 
-Flatten layer converts the extracted features into a 1D vector.
+Introduced Batch Normalization layers to normalize activations and reduce internal covariate shift.
 
-Dense layers include:
+Helped stabilize training and improve generalization.
 
-128 neurons with ReLU activation
+Improved accuracy compared to the basic model.
 
-64 neurons with ReLU activation
+3. CNN Model with Data Augmentation
 
-1 neuron with Sigmoid activation (binary classification)
+Implemented data augmentation using ImageDataGenerator to generate more diverse training samples.
 
-The model is compiled with:
+Applied transformations like rescaling, zooming, horizontal flipping, and shear transformations.
 
-Adam optimizer
+Further reduced overfitting and improved model robustness.
 
-Binary cross-entropy loss function
+Training & Evaluation
 
-Accuracy as a performance metric
+Models were compiled using the Adam optimizer and binary cross-entropy loss.
 
-Model is trained for 10 epochs.
+Accuracy and loss curves were plotted for both training and validation datasets.
 
-4. Model Performance Visualization
+The best-performing model incorporated both batch normalization and data augmentation.
 
-Training and validation accuracy/loss curves are plotted using Matplotlib to analyze performance.
+Testing
 
-The accuracy curve helps identify convergence and overfitting trends.
+The trained model was tested using sample images of cats and dogs.
 
-5. Overfitting Reduction Strategies
+Predictions were made using OpenCV for image preprocessing.
 
-The following techniques are suggested to reduce overfitting:
+Techniques to Reduce Overfitting
 
-More training data
+Adding more data
 
-Data augmentation
+Data Augmentation
 
 L1/L2 Regularization
 
@@ -65,46 +64,12 @@ Batch Normalization
 
 Reducing model complexity
 
-A new CNN model is built incorporating Batch Normalization and Dropout (0.1 probability) to improve generalization.
+Results
 
-6. Testing Model Predictions
+The model with both batch normalization and data augmentation achieved the highest accuracy.
 
-Sample test images (cat.jpeg and dog.jpeg) are loaded using cv2.imread().
+Overfitting was significantly reduced compared to the basic CNN model.
 
-Images are resized to (256, 256) and reshaped before prediction.
+Conclusion
 
-The trained model is used to classify these images using model.predict().
-
-7. Data Augmentation for Further Overfitting Reduction
-
-ImageDataGenerator is used to apply augmentation techniques:
-
-Rescaling (Normalization)
-
-Zooming (0.2 factor)
-
-Horizontal flipping
-
-Shear transformation (0.2 factor)
-
-Training and validation generators are created using flow_from_directory().
-
-8. Final Model with Augmentation and Batch Normalization
-
-The CNN model is enhanced with Batch Normalization after each convolutional layer.
-
-Dropout is maintained to further reduce overfitting.
-
-The model is compiled and trained using the augmented dataset.
-
-Training performance is visualized again using accuracy/loss curves.
-
-9. Conclusion
-
-The model undergoes iterative improvements to enhance generalization.
-
-Overfitting is addressed through Batch Normalization, Dropout, and Data Augmentation.
-
-The final model is expected to perform better on unseen data due to these optimizations.
-
-
+This project demonstrated the effectiveness of batch normalization and data augmentation in improving CNN performance and reducing overfitting. These techniques help in building more generalizable models for image classification tasks.
