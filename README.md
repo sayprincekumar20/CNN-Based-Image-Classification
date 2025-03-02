@@ -10,7 +10,7 @@ The dataset is downloaded from Kaggle using kagglehub and consists of training a
 
 Model Architectures
 
-Three different CNN architectures were implemented to analyze and mitigate overfitting:
+. Three different CNN architectures were implemented to analyze and mitigate overfitting:
 
 1. Basic CNN Model
 
